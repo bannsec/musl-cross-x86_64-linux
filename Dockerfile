@@ -26,9 +26,9 @@ RUN cd /opt/musl-cross-make && make -sj`nproc` && make -s install && \
 # So.. sometimes auto configure and such tools will not actually add LDFLAGS when they don't think they're needed. They are wrong. Thus this jibberish here to get around it.
 ENV LD_LIBRARY_PATH="/opt/cross/lib:/opt/cross/x86_64-linux-musl/lib/"
 ENV LDFLAGS="-L/opt/cross/lib/ -L/opt/cross/x86_64-linux-musl/lib/"
-ENV CXXFLAGS="-I/opt/cross/include $LDFLAGS"
-ENV CFLAGS="$CXXFLAGS"
-ENV CPPFLAGS="$CXXFLAGS"
+ENV CFLAGS="-I/opt/cross/include $LDFLAGS"
+ENV CPPFLAGS="$CFLAGS"
+ENV CXXFLAGS="$CFLAGS"
 ENV PATH="$PATH:/opt/cross/bin" CXX="g++" OPENSSL_ROOT_DIR="/opt/cross/"
 
 RUN cd /opt && wget -q https://www.openssl.org/source/openssl-1.1.1f.tar.gz && tar xf openssl-1.1.1f.tar.gz && \
